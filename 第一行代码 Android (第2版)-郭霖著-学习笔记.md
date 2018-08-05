@@ -117,7 +117,7 @@
 		然后成功搭建了开发环境；
 		接着创建了第一个Android项目，并对其目录结构和执行过程有了一定认识；
 		最后学习了日志工具。
-	不过也别太过于满足，还需要付出更多努力。
+	不过也别太过于满足，还需要付出更多努力。适当休息，继续前进！
 
 #2 探究活动
 	制定后面的学习路线：界面（看得见，感兴趣）--》出色的程序算法、架构（不易看见、有难度）
@@ -352,9 +352,15 @@
 		停止状态：不处于栈顶，且完全不可见
 		销毁状态：从返回栈中移除
 ###2.4.3 活动的生存期
-7个回调方法(钩子函数)——覆盖活动生命周期的每一个环节
+7个回调方法(钩子函数)——覆盖活动生命周期的每一个环节，什么时候调用？
 
-		
+	onCreate()-活动在第一次被创建的时候调用。完成各种初始化操作，比如加载布局、绑定事件等。
+	onStart()-在活动由不可见变为可见的时候调用。
+	onResume()-在活动准备和用户交互的时候调用。此时活动一定位于栈顶，并处于运行状态。
+	onPause()-在启动或恢复另一个活动的时候调用。	
+	onStop()-在活动完全不可见的时候调用。和onPause()主要区别在于，如果启动的新活动是一个对话框式的活动，那么onPause()会执行，onStop()不会执行。
+	onDestroy()-活动销毁前调用，之后活动变为销毁状态	。
+	onRestart()-活动从停止变为运行状态之前调用，即活动被重新启动了。
 三种生存期——除onRestart()方法外，其他都是两两相对的
 
 		完整生存期
@@ -366,7 +372,56 @@
 		前台生存期：活动总是处于【运行状态的】，可以和用户进行交互
 			onResume()-继续，重新开始
 			onPause()-暂停
-活动周期示意图
+活动生命周期的示意图
 
-![a](C:\\Users\\38415\Desktop\\Android知识截图\\01-Activity生命周期-英文版-详细.png)
+![活动生命周期的示意图](https://raw.githubusercontent.com/litangbo/Android_Study/master/01-Activity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%8B%B1%E6%96%87%E7%89%88-%E8%AF%A6%E7%BB%86.png)
+
+###2.4.4 体验活动的生命周期
+	ActivityLifeCycleTest
+		MainActivity:Log.v()
+		NormalActivity
+		DialogActivity
+###2.4.5 活动被回收了怎么办
+	onSaveInstanceState(Bundle outState)
+	...
+##2.5 活动的启动模式
+	四种——通过<activity>标签的android:launchMode属性配置启动模式
+		standard
+		singleTop
+		singleTask
+		singleInstance
+###2.5.1 standard
+	体会效果...
+###2.5.2 singleTop
+	体会效果...
+###2.5.3 singleTask
+	体会效果...
+###2.5.4 singleInstance
+	体会效果...
+##2.6 活动的最佳实践
+###2.6.1 当前在哪一个活动
+	public class BaseActivity extends AppCompatActivity {
+		// TODO
+	}
+###2.6.2 随时随地退出程序
+	public class ActivityCollector {
+		// TODO
+	}
+###2.6.3 启动活动的最佳写法
+	// FirstActivity向SecondActivity传入两个字符串参数
+	// SecondActivity.java
+	public static void actionStart(Context context,String data1,String data2) {
+		// TODO
+	}
+##2.7 小结与点评
+	有点疲惫，但内心仍充满喜悦：
+		活动所有重要的知识点
+			从活动的基本用法
+			到启动活动和传递数据的方式
+			再到活动的生命周期
+			以及活动的启动模式
+		活动的最佳实践技巧
+	在活动方面算一个小高手了，但后面需要学习的还很多，要做好心理准备。
+	适当休息，继续前进！		
+		
 	
